@@ -40,7 +40,7 @@ module Reek
       # @return [AppConfiguration]
       #
       # @public
-      def self.from_hash(hash = {})
+      def self.from_hash(hash)
         allocate.tap do |instance|
           instance.instance_eval do
             load_values hash
