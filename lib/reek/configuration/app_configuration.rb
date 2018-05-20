@@ -102,12 +102,6 @@ module Reek
       def excluded_paths
         @excluded_paths ||= [].extend(ExcludedPaths)
       end
-
-      def find_and_load(path: nil)
-        configuration_hash = ConfigurationFileFinder.find_and_load(path: path)
-
-        load_values(configuration_hash)
-      end
     end
   end
 end
