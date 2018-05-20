@@ -25,9 +25,8 @@ module Reek
       #
       # @public
       def self.from_path(path)
-        allocate.tap do |instance|
-          instance.instance_eval { find_and_load(path: path) }
-        end
+        configuration_hash = ConfigurationFileFinder.find_and_load(path: path)
+        new(configuration_hash: configuration_hash)
       end
 
       # Instantiate a configuration via the default path.
@@ -36,9 +35,8 @@ module Reek
       #
       # @public
       def self.from_default_path
-        allocate.tap do |instance|
-          instance.instance_eval { find_and_load(path: nil) }
-        end
+        configuration_hash = ConfigurationFileFinder.find_and_load(path: nil)
+        new(configuration_hash: configuration_hash)
       end
 
       # Instantiate a configuration by passing everything in.
@@ -51,15 +49,11 @@ module Reek
       #
       # @public
       def self.from_hash(hash)
-        allocate.tap do |instance|
-          instance.instance_eval do
-            load_values hash
-          end
-        end
+        new(configuration_hash: hash)
       end
 
       def self.default
-        new
+        new(configuration_hash: {})
       end
 
       # Returns the directive for a given directory.
@@ -87,6 +81,10 @@ module Reek
             directory_directives.add key, value
           end
         end
+      end
+
+      def initialize(configuration_hash: nil)
+        load_values(configuration_hash)
       end
 
       private
