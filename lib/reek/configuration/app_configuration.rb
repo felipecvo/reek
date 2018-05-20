@@ -17,17 +17,27 @@ module Reek
       include ConfigurationValidator
       EXCLUDE_PATHS_KEY = 'exclude_paths'.freeze
 
-      # Instantiate a configuration via given path, or the default path.
+      # Instantiate a configuration via the given path.
       #
-      # @param path [Pathname] the path to the config file, or nil to use the
-      # default path.
+      # @param path [Pathname] the path to the config file.
       #
       # @return [AppConfiguration]
       #
       # @public
-      def self.from_path(path = nil)
+      def self.from_path(path)
         allocate.tap do |instance|
           instance.instance_eval { find_and_load(path: path) }
+        end
+      end
+
+      # Instantiate a configuration via the default path.
+      #
+      # @return [AppConfiguration]
+      #
+      # @public
+      def self.from_default_path
+        allocate.tap do |instance|
+          instance.instance_eval { find_and_load(path: nil) }
         end
       end
 
