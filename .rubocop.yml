@@ -6,6 +6,7 @@ AllCops:
     - 'samples/**/*'
     - 'tmp/**/*'
     - 'vendor/**/*'
+    - 'lib/ext/**/*'
   TargetRubyVersion: 2.2
 
 # Place . on the previous line
