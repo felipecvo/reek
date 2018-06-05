@@ -1,0 +1,24 @@
+---
+UnusedPrivateMethod:
+  exclude:
+    - "exclude regexp"
+UncommunicativeMethodName:
+  reject:
+    - "reject regexp"
+  accept:
+    - "accept regexp"
+UncommunicativeModuleName:
+  reject:
+    - "reject regexp"
+  accept:
+    - "accept regexp"
+UncommunicativeParameterName:
+  reject:
+    - "reject regexp"
+  accept:
+    - "accept regexp"
+UncommunicativeVariableName:
+  reject:
+    - "reject regexp"
+  accept:
+    - "accept regexp"

@@ -97,6 +97,20 @@ RSpec.describe Reek::Configuration::ConfigurationFileFinder do
       configuration = described_class.load_from_file(CONFIG_PATH.join('full_mask.reek'))
       expect(configuration).to eq(sample_configuration_loaded)
     end
+
+    context 'strings as regexes' do
+      it 'properly converts them' do
+        expected = {
+          'UnusedPrivateMethod' => { 'exclude' => [/exclude regexp/] },
+          'UncommunicativeMethodName' => { 'reject' => [/reject regexp/], 'accept' => [/accept regexp/] },
+          'UncommunicativeModuleName' => { 'reject' => [/reject regexp/], 'accept' => [/accept regexp/] },
+          'UncommunicativeParameterName' => { 'reject' => [/reject regexp/], 'accept' => [/accept regexp/] },
+          'UncommunicativeVariableName' => { 'reject' => [/reject regexp/], 'accept' => [/accept regexp/] }
+        }
+        configuration = described_class.load_from_file(CONFIG_PATH.join('ruby_regexp.reek'))
+        expect(configuration).to eq(expected)
+      end
+    end
   end
 
   private
